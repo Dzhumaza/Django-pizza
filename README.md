@@ -21,19 +21,18 @@
 Создать и активировать виртуальное окружение
 
 Установить зависимости:
-pip install -r req.txt
+ ``` pip install -r req.txt ```
 
 Выполнить следующие команды:
 
-Команда для создания миграций приложения для базы данных
-python manage.py migrate
+Команда для создания миграций приложения для базы данных:
+``` py manage.py migrate ```
 
 Команда для запуска приложения:
-python manage.py runserver
+``` py manage.py runserver ```
 
 При создании моделей или их изменении необходимо выполнить следующие команды:
-python manage.py makemigrations
-python manage.py migrate
+``` py manage.py makemigrations | py manage.py migrate ``` 
 
 
 
