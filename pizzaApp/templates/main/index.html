@@ -1,0 +1,56 @@
+<!-- pizzaApp/templates/main/index.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="category-container">
+    {% for category in categories %}
+        <h2 class="category-name" id="{{ category.name }}">
+            <a class="cat-name" href="{% url 'category_list' category.slug %}">{{ category.name }}</a>
+        </h2>
+        <div class="product-list">
+            {% for product in products %}
+                {% if product.category == category %}
+                    <div class="product-card">
+                        <a class="product-a" href="">
+                            <img src="{{ product.image.url }}" alt="{{ product.title }}" class="product-img" />
+                            <div class="product-card-info">
+                                <h3 class="product-name">{{ product.title }}</h3>
+                                <p class="product-desc">{{ product.text }}</p>
+
+
+                            </div>
+                        </a>
+                        <div class="product-line"></div>
+                        <div class="box-buy">
+                            <div class="product-weight">
+                                Вес: {{product.weight }} г.
+                            </div>
+                            <div class="product-price-cont">
+                                <p class="product-price">Цена: {{ product.price }} KGS</p>
+                            </div>
+                        </div>
+                    </div>
+                <!-- Modal -->
+            <div id="productModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div class="modal-body">
+                        <img id="modalProductImg" src="" alt="" class="modal-product-img" />
+                        <h3 id="modalProductName"></h3>
+                        <p id="modalProductDesc"></p>
+                        <p id="modalProductWeight"></p>
+                        <p id="modalProductPrice"></p>
+                        <button id="modalBackBtn">Назад</button>
+                    </div>
+                </div>
+            </div>
+
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

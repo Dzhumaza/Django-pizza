@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="wrapper"></div>
+            <div class="nav" id="navbar">
+                <div class="logo">
+                    <img class="logo-img" src="{% static 'imgs/pizza.png' %}" alt="" id="#main">
+                    <h1><a class="nav_contact" href="{% url 'index' %}">Главная</a></h1>
+                </div>
+                <div class="basket">
+                    <img class="logo-img" src="{% static 'imgs/contact_phone.png' %}" alt="">
+                    <h2><a class="nav_contact" href="#contacts">Связь с нами</a></h2>
+                </div>
+            </div>
+            <div class="header-img-container">
+                <img class="header-img" src="{% static 'imgs/Supreme_pizza (1).jpg' %}" alt="">
+                <div class="img__text">
+                    <h2 class="text-title" >ИМПЕРИЯ ПИЦЦЫ</h2>
+                    <p class="text" id="contacts"> Выбирай нас, покупай у нас — ваш лучший выбор без лишних фраз! </p>
+                </div>
+            </div>
+            <div class="wrapper">
+                <div class="contact-us">
+                    <p class="contact-title">Звоните по номерам: </p>
+                    <div class="contact-img-text">
+                        <img class="contact-img" src="{% static 'imgs/phone.png' %}" alt="">
+                        <p>0(772)510707</p>
+                    </div>
+                    <div class="contact-img-text">
+                        <img class="contact-img" src="{% static 'imgs/phone.png' %}" alt="">
+                        <p>0(551)510707</p>
+                    </div>
+                    <div class="contact-img-text">
+                        <img class="contact-img" src="{% static 'imgs/phone.png' %}" alt="">
+                        <p>0(704)510707</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+    <main>
+        <div class="center">
+            <div class="box-flex">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-wrapper">
+                <div class="footer-store">
+                    <a href="https://play.google.com" target="_blank">
+                        <img class="footer-img" src="{% static 'imgs/store (1).png' %}" alt="">
+                    </a>
+                    <a href="https://apps.apple.com" target="_blank">
+                        <img class="footer-img1" src="{% static 'imgs/store.png' %}" alt="">
+                    </a>
+                </div>
+                <div class="footer-faq">
+                    <p>© 2002-2024 Империя Пиццы</p>
+                    <p>Все права защищены</p>
+                    <p>ОсОО "Империя пиццы"</p>
+                    <p>пер. Магнитогорский, дом 16, Бишкек, Чуйская область 720031,</p>
+                    <p>Кыргызстан</p>
+                    <p>Телефон: 0551510707</p>
+                </div>
+                <div class="footer-social-media">
+                    <a href="https://www.facebook.com" target="_blank">
+                        <img class="footer-sm-img" src="{% static 'imgs/facebook.png' %}" alt="">
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank">
+                        <img class="footer-sm-img" src="{% static 'imgs/instagram.png' %}" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("productModal");
+    const closeModalBtn = document.querySelector(".close");
+    const backBtn = document.getElementById("modalBackBtn");
+
+    const modalProductImg = document.getElementById("modalProductImg");
+    const modalProductName = document.getElementById("modalProductName");
+    const modalProductDesc = document.getElementById("modalProductDesc");
+    const modalProductWeight = document.getElementById("modalProductWeight");
+    const modalProductPrice = document.getElementById("modalProductPrice");
+
+    document.querySelectorAll(".product-a").forEach(productLink => {
+        productLink.addEventListener("click", (event) => {
+            event.preventDefault();
+
+            const productCard = productLink.closest(".product-card");
+            const productImg = productCard.querySelector(".product-img").src;
+            const productName = productCard.querySelector(".product-name").textContent;
+            const productDesc = productCard.querySelector(".product-desc").dataset.fullText;
+            const productWeight = productCard.querySelector(".product-weight").textContent;
+            const productPrice = productCard.querySelector(".product-price").textContent;
+
+            modalProductImg.src = productImg;
+            modalProductName.textContent = productName;
+            modalProductDesc.textContent = productDesc;
+            modalProductWeight.textContent = productWeight;
+            modalProductPrice.textContent = productPrice;
+
+            modal.style.display = "block";
+        });
+    });
+
+    closeModalBtn.onclick = () => {
+        modal.style.display = "none";
+    }
+
+    backBtn.onclick = () => {
+        modal.style.display = "none";
+    }
+
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    document.querySelectorAll('.product-desc').forEach(desc => {
+        const fullText = desc.textContent;
+        if (fullText.length > 50) {
+            const truncatedText = fullText.substring(0, 50);
+            desc.innerHTML = `${truncatedText} <a href="#" class="read-more" style="color: #323232; text-decoration: none;">...</a>`;
+            desc.dataset.fullText = fullText;
+        }
+
+
+    });
+});
+</script>
+
+
+</body>
+</html>
